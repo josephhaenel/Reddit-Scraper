@@ -51,10 +51,6 @@ def get_post_data(soup):
     link_element = soup.find('a', {'slot': 'full-post-link'})
     post_data['link'] = link_element['href'] if link_element else None
     
-    # Link to the Image
-    image_element = soup.find('img', alt="r/CaptainSparklez - Jord and his new headset")
-    post_data['image_link'] = image_element['src'] if image_element else None
-    
     # Author
     author_element = soup.find('span', class_='whitespace-nowrap')
     post_data['author'] = author_element.text.strip() if author_element else None
