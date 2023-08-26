@@ -26,19 +26,19 @@ Add the list of subreddits you want to scrape in PythonScraper/subreddits.txt (o
 
 ### Dependencies
 
-    `selenium`: for automating browser actions.
-    `BeautifulSoup4`: for parsing HTML and extracting required information.
+selenium: for automating browser actions.
+BeautifulSoup4: for parsing HTML and extracting required information.
 
-    You can install them using `pip install selenium beautifulsoup4`
+You can install them using `pip install selenium beautifulsoup4`
 
 ### Chromedriver setup *REQUIRED*
 
-    The script uses Chromedriver to interact with the Chrome browser. To get it running, follow these steps:
+The script uses Chromedriver to interact with the Chrome browser. To get it running, follow these steps:
     1. Download the appropriate version of Chromedriver for your system from https://googlechromelabs.github.io/chrome-for-testing/
     2. Extract the downloaded file
-    3. Place the `chromedriver.exe` in the `resources` directory of the project
+    3. Place the *chromedriver.exe* in the *resources* directory of the project
 
-    Ensure that the version of Chromedriver you download is compatible with the version of Chrome installed on your system
+Ensure that the version of Chromedriver you download is compatible with the version of Chrome installed on your system
 
 ## Contributing
 
