@@ -22,7 +22,7 @@ Install the required dependencies:
 
 Add the list of subreddits you want to scrape in PythonScraper/subreddits.txt (one subreddit per line), then run:
 
-`python scraper.py` # or the name you've given this script
+`python RedditScraper.py` # or the name you've given this script
 
 ### Dependencies
 
