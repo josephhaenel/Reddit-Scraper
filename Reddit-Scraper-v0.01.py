@@ -1,7 +1,5 @@
 import time
 import random
-import requests
-import zipfile
 import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -15,7 +13,6 @@ BASE_URL = 'https://www.reddit.com/r/'  # Base URL of a subreddit
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 }
-
 
 def getSoupObj(subreddit, scrolls=3):
     '''Returns a BeautifulSoup object for a given subreddit'''
@@ -32,7 +29,6 @@ def getSoupObj(subreddit, scrolls=3):
     driver.quit()
     return soup
 
-
 def getTotalMembers(subredditSoupObj):
     '''Returns the total number of members in a given subreddit'''
     membersIdentifier = subredditSoupObj.find("faceplate-number")
@@ -41,31 +37,29 @@ def getTotalMembers(subredditSoupObj):
     # Extracts number and removes commas
     return int(membersIdentifier['number'])
 
-
-
 def getTitle(subredditSoupObj):
     '''Returns the title of a subreddit post'''
     postTitle = subredditSoupObj.find("div", {"slot": "title"})
     if not postTitle:
         raise Exception(f"Post title for {subredditSoupObj} not found")
-    return postTitle
-
+    return postTitle.text.strip()
 
 def getAuthor(subredditSoupObj):
     '''Returns the author of a subreddit post'''
     author = subredditSoupObj.find("span", class_="whitespace-nowrap")
     if not author:
         raise Exception(f"Author for {subredditSoupObj} not found")
-    return author
-
+    return author.text.strip()
 
 def getTimeStamp(subredditSoupObj):
     '''Returns the time stamp for a subreddit post'''
     postTimeStamp = subredditSoupObj.find("faceplate-timeago")
     if not postTimeStamp:
         raise Exception(f"Post time stamp for {subredditSoupObj} not found")
-    return postTimeStamp
-
+    timeTag = postTimeStamp.find('time')
+    if not timeTag:
+        raise Exception(f"Post time tag for {postTimeStamp} not found")
+    return timeTag['datetime']
 
 # def getCommentCount(subredditSoupObj):
 #     '''Returns the number of comments for a subreddit post'''
@@ -75,7 +69,6 @@ def getTimeStamp(subredditSoupObj):
 #         raise Exception(f"Comment Count for {subredditSoupObj} not found")
 #     return commentCount
 
-
 def getThumbsUp(subredditSoupObj):
     '''Returns the number of "likes" for a subreddit post'''
     thumbsUp = subredditSoupObj.get("score")  # Not sure if this works right
@@ -83,9 +76,7 @@ def getThumbsUp(subredditSoupObj):
         raise Exception(f"Thumbs up for {subredditSoupObj} not found")
     return thumbsUp
 
-
-''' Could add link to post, authorAvatar, link to image, etc'''
-
+''' TODO: Could add link to post, authorAvatar, link to image, etc'''
 
 def scrape_subreddit(subreddit, output_file=os.path.join(os.path.dirname(__file__), 'IO', 'output.txt')):
     '''Scrape data from a subreddit and write it to output.txt'''
@@ -129,7 +120,6 @@ def scrape_subreddit(subreddit, output_file=os.path.join(os.path.dirname(__file_
             if index > MAX_POSTS:
                 break
 
-
 def main():
     '''Main function'''
     # Opening the "subreddits.txt" file which contains the subreddits to be scraped
@@ -141,7 +131,6 @@ def main():
         print(f"Scraping {subreddit}...")
         scrape_subreddit(subreddit)
         print(f"Finished scraping {subreddit}\n{'='*60}\n")
-
 
 if __name__ == '__main__':
     main()
