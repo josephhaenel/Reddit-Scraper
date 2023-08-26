@@ -1,18 +1,12 @@
 import time
-import random
 import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.service import Service as ChromeService
 from bs4 import BeautifulSoup
-from webdriver_manager.chrome import ChromeDriverManager  # Possiblly deprecated
 
 '''Constants'''
 MAX_POSTS = 10  # Maximum number of posts to be scraped
 BASE_URL = 'https://www.reddit.com/r/'  # Base URL of a subreddit
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-}
 
 def getSoupObj(subreddit, scrolls=3):
     '''Returns a BeautifulSoup object for a given subreddit'''
@@ -61,14 +55,6 @@ def getTimeStamp(subredditSoupObj):
         raise Exception(f"Post time tag for {postTimeStamp} not found")
     return timeTag['datetime']
 
-# def getCommentCount(subredditSoupObj):
-#     '''Returns the number of comments for a subreddit post'''
-#     commentCount = subredditSoupObj.find(
-#         "commentcount")  # Not sure if this works right
-#     if not commentCount:
-#         raise Exception(f"Comment Count for {subredditSoupObj} not found")
-#     return commentCount
-
 def getThumbsUp(subredditSoupObj):
     '''Returns the number of "likes" for a subreddit post'''
     thumbsUp = subredditSoupObj.get("score")  # Not sure if this works right
@@ -99,7 +85,6 @@ def scrape_subreddit(subreddit, output_file=os.path.join(os.path.dirname(__file_
                 "Title": getTitle(post),
                 "Author": getAuthor(post),
                 "TimeStamp": getTimeStamp(post),
-                # "CommentCount": getCommentCount(post),
                 "ThumbsUp": getThumbsUp(post)
             }
 
@@ -108,7 +93,6 @@ def scrape_subreddit(subreddit, output_file=os.path.join(os.path.dirname(__file_
                 f"Title:            {postData['Title']}         \n"
                 f"Author:           {postData['Author']}        \n"
                 f"TimeStamp:        {postData['TimeStamp']}     \n"
-                # f"CommentCount:     {postData['CommentCount']}  \n"
                 f"ThumbsUp:         {postData['ThumbsUp']}      \n"
                 f"{'-' * 40}\n"
             )

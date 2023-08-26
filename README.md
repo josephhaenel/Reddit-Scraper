@@ -22,14 +22,23 @@ Install the required dependencies:
 
 Add the list of subreddits you want to scrape in PythonScraper/subreddits.txt (one subreddit per line), then run:
 
-`python RedditScraper.py` # or the name you've given this script
+`python RScraper_v#.#.#.py` # or the name you've given this script
 
 ### Dependencies
 
-    requests
-    selenium
-    beautifulsoup4
-    webdriver_manager
+    `selenium`: for automating browser actions.
+    `BeautifulSoup4`: for parsing HTML and extracting required information.
+
+    You can install them using `pip install selenium beautifulsoup4`
+
+### Chromedriver setup *REQUIRED*
+
+    The script uses Chromedriver to interact with the Chrome browser. To get it running, follow these steps:
+    1. Download the appropriate version of Chromedriver for your system from https://googlechromelabs.github.io/chrome-for-testing/
+    2. Extract the downloaded file
+    3. Place the `chromedriver.exe` in the `resources` directory of the project
+
+    Ensure that the version of Chromedriver you download is compatible with the version of Chrome installed on your system
 
 ## Contributing
 
