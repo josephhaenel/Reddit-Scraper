@@ -34,6 +34,7 @@ You can install them using `pip install selenium beautifulsoup4`
 ### Chromedriver setup *REQUIRED*
 
 The script uses Chromedriver to interact with the Chrome browser. To get it running, follow these steps:
+
     1. Download the appropriate version of Chromedriver for your system from https://googlechromelabs.github.io/chrome-for-testing/
     2. Extract the downloaded file
     3. Place the *chromedriver.exe* in the *resources* directory of the project
