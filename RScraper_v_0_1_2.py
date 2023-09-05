@@ -1,5 +1,5 @@
 '''
-    File:   RScraper_v0.1.2.py
+    File:   RScraper_v0_1_2.py
     By:     Joseph Haenel
     Date:   08-29-2023
     Dependencies: Selenium, BeautifulSoup4, ChromeDriver.exe
